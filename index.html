@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Store - Squarespace Commerce Template</title>
+    <!-- Squarespace Core Typography Simulation -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* BƯỚC 4: TÙY BIẾN BẢNG 3 MÀU CHỦ ĐẠO (SITE STYLES PALETTE) */
+        :root {
+            --color-bg-primary: #FAF8F5;      /* Màu 1: Trắng kem ấm (Nền chính) */
+            --color-text-primary: #1B365D;    /* Màu 2: Xanh Navy đậm (Chữ & Tiêu đề) */
+            --color-accent: #D96B27;          /* Màu 3: Cam đất (Nút bấm & Điểm nhấn) */
+            --color-border: #E5E0D8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        /* HEADER & MAIN NAVIGATION (BƯỚC 3) */
+        header.sqs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 6%;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            background-color: var(--color-bg-primary);
+            z-index: 100;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--color-text-primary);
+        }
+
+        nav.main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav.main-nav a {
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        nav.main-nav a:hover,
+        nav.main-nav a.active {
+            color: var(--color-accent);
+        }
+
+        /* Ẩn trang Blog khỏi Main Navigation theo yêu cầu Bước 3 */
+        .nav-item-hidden {
+            display: none !important;
+        }
+
+        .cart-badge {
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* HERO BANNER */
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            margin-bottom: 32px;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* COMMERCE SECTION - 3 SẢN PHẨM (BƯỚC 2) */
+        .shop-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 6% 80px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 16px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 36px;
+        }
+
+        .product-card {
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(27, 54, 93, 0.08);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            background-color: #EFECE6;
+        }
+
+        .product-info {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 0.92rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .product-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .btn-add-cart {
+            background-color: var(--color-text-primary);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--color-accent);
+        }
+
+        /* GET IN TOUCH SECTION (BƯỚC 3) */
+        .contact-section {
+            background-color: var(--color-text-primary);
+            color: var(--color-bg-primary);
+            padding: 70px 6%;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .contact-section p {
+            max-width: 550px;
+            margin: 0 auto 28px;
+            opacity: 0.9;
+        }
+
+        .contact-form {
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px 16px;
+            border-radius: 4px;
+            border: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--color-border);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER & THANH ĐIỀU HƯỚNG CHÍNH (MAIN NAVIGATION) -->
+    <header class="sqs-header">
+        <a href="#" class="site-title">STUDIO CRAFT.</a>
+        <nav class="main-nav" aria-label="Main Navigation">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <!-- Trang Blog đã được ẩn (Not Linked) theo Bước 3 -->
+                <li class="nav-item-hidden"><a href="#blog">Blog</a></li>
+                <!-- Trang Liên hệ đã đổi tên thành "Get In Touch" theo Bước 3 -->
+                <li><a href="#get-in-touch">Get In Touch</a></li>
+            </ul>
+        </nav>
+        <div class="cart-badge" onclick="alert('Giỏ hàng hiện có ' + cartCount + ' sản phẩm.')">
+            Cart (<span id="cart-count">0</span>)
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+        <h1>Thiết kế tối giản cho cuộc sống hiện đại</h1>
+        <p>Bộ sưu tập sản phẩm thủ công tinh tế với bảng màu ấm áp, chất liệu bền vững và thân thiện với môi trường.</p>
+        <a href="#shop" class="btn-primary">Khám phá Cửa hàng</a>
+    </section>
+
+    <!-- CỬA HÀNG TRỰC TUYẾN - 3 SẢN PHẨM MỚI (BƯỚC 2) -->
+    <main id="shop" class="shop-container">
+        <div class="section-header">
+            <div>
+                <h2>Sản phẩm nổi bật (Shop)</h2>
+                <p>3 sản phẩm mới được cập nhật trong danh mục Thương mại</p>
+            </div>
+            <span>Hiển thị 3 sản phẩm</span>
+        </div>
+
+        <div class="product-grid">
+            <!-- SẢN PHẨM 1: ÁO PHÔNG -->
+            <article class="product-card">
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="Áo phông Cotton Organic" class="product-image">
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Áo phông Cotton Organic</h3>
+                        <p class="product-desc">Chất liệu 100% cotton hữu cơ thoáng mát, form dáng hiện đại, đường may tỉ mỉ phù hợp mặc hằng ngày.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">250.000₫</span>
+                        <button class="btn-add-cart" onclick="addToCart('Áo phông Cotton Organic')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SẢN PHẨM 2: CỐC SỨ -->
+            <article class="product-card">
+                <img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80" alt="Cốc sứ thủ công men mờ" class="product-image">
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Cốc sứ thủ công men mờ</h3>
+                        <p class="product-desc">Dung tích 350ml, chế tác thủ công từ gốm Bát Tràng cao cấp, giữ nhiệt tốt cho cà phê và trà sáng.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">145.000₫</span>
+                        <button class="btn-add-cart" onclick="addToCart('Cốc sứ thủ công men mờ')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SẢN PHẨM 3: TÚI XÁCH TOTE -->
+            <article class="product-card">
+                <img src="https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=800&q=80" alt="Túi xách vải Canvas dày dặn" class="product-image">
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Túi xách vải Canvas</h3>
+                        <p class="product-desc">Vải bố định lượng cao chống thấm nhẹ, ngăn chứa rộng rãi đựng vừa laptop 14 inch và sách vở.</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">180.000₫</span>
+                        <button class="btn-add-cart" onclick="addToCart('Túi xách vải Canvas')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- MỤC LIÊN HỆ ĐÃ ĐỔI TÊN THÀNH "GET IN TOUCH" (BƯỚC 3) -->
+    <section id="get-in-touch" class="contact-section">
+        <h2>Get In Touch</h2>
+        <p>Bạn có câu hỏi về sản phẩm hoặc đơn hàng? Hãy để lại lời nhắn cho chúng tôi.</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất.');">
+            <input type="text" placeholder="Họ và tên của bạn" required>
+            <input type="email" placeholder="Địa chỉ Email" required>
+            <textarea rows="4" placeholder="Nội dung lời nhắn..." required></textarea>
+            <button type="submit" class="btn-primary">Gửi tin nhắn</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2026 STUDIO CRAFT. Powered by Squarespace Commerce Template.</p>
+    </footer>
+
+    <script>
+        let cartCount = 0;
+        function addToCart(productName) {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            alert('Đã thêm "' + productName + '" vào giỏ hàng!');
+        }
+    </script>
+</body>
+</html>
